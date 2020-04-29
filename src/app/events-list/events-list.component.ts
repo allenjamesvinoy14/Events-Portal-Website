@@ -1,29 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { EventService } from './shared/event.service';
+import { ToastrService } from '../common/toastr.service';
 
 @Component({
     selector: 'event-list',
     template: `<div>
                     <h1> Upcoming Angular Events </h1>
                     <hr/>
-                    <event-thumbnail [event] = "event1" ></event-thumbnail>
+                    <div class="row">
+                        <div *ngFor="let event of events" class="col-md-5">
+                            <event-thumbnail (click)="handleThumbnailClick(event.name)" [event]="event"></event-thumbnail>
+                        </div>
+                    </div>
                 </div>` 
 })
 
 //$event is mandatory while passing information from the child component to the parent componenet
-export class EventsListComponent{
-    //let's assume this dummy data we get from some API
-
-    event1 = {
-        id: 1,
-        name: 'Angular Connect',
-        date: '9/26/2036',
-        time: '10:00 am',
-        price: 599.99,
-        imageUrl: '/assets/images/angularconnet-shield.png',
-        location: {
-            address: '1057 DT',
-            city: 'Bangalore',
-            country: 'India' 
-        }
+export class EventsListComponent implements OnInit{
+    
+    events:any[]
+    constructor(private eventService: EventService,private toastrService:ToastrService){
+        
     }
+
+    //good practise to fetch data from services
+    ngOnInit(){
+        this.events = this.eventService.getEvents();
+    }
+
+    handleThumbnailClick(eventName){
+        this.toastrService.success(eventName); //best practise to use 3rd party services
+    }
+
 }
