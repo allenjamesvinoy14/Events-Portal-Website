@@ -26,7 +26,7 @@ export class EventsListComponent implements OnInit{
 
     //good practise to fetch data from services
     ngOnInit(){
-        this.events = this.route.snapshot.data['events'];
+        this.events = this.route.snapshot.data['events']; // events name is the same as the one in the route
     }
 
     handleThumbnailClick(eventName){
