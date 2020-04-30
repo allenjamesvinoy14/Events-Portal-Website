@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class EventService{
     getEvents(){
         //let assume we are making a AJAX call.
-        return EVENTS; 
-        
+
+        return EVENTS;    
+    }
+    getEvent(id: number){
+        //assuming an AJAX call is happening
+        return EVENTS.find( event => event.id === id );
     }
 }
 
