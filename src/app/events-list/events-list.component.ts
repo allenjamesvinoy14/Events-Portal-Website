@@ -18,14 +18,14 @@ import { ToastrService } from '../common/toastr.service';
 //$event is mandatory while passing information from the child component to the parent componenet
 export class EventsListComponent implements OnInit{
     
-    events:any[]
+    events:any
     constructor(private eventService: EventService,private toastrService:ToastrService){
         
     }
 
     //good practise to fetch data from services
     ngOnInit(){
-        this.events = this.eventService.getEvents();
+        this.eventService.getEvents().subscribe(events=>{ this.events = events });
     }
 
     handleThumbnailClick(eventName){
@@ -33,3 +33,4 @@ export class EventsListComponent implements OnInit{
     }
 
 }
+

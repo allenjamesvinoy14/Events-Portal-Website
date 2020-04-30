@@ -6,7 +6,15 @@ export class EventService{
     getEvents(){
         //let assume we are making a AJAX call.
 
-        return EVENTS;    
+        let subject = new Subject();
+
+        //simulating server call
+        setTimeout(()=>{
+          subject.next(EVENTS);subject.complete();
+        },500)
+
+        return subject;
+
     }
     getEvent(id: number){
         //assuming an AJAX call is happening
