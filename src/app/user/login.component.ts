@@ -8,13 +8,15 @@ import { Router } from '@angular/router';
 
 export class LoginComponent {
 
+    mouseoverLogin:boolean
+
     constructor(private authService:AuthService,private route:Router){
 
     }
 
     login(formValues){
         this.authService.loginUser(formValues.userName,
-            formValues.password);
+            formValues.password); // Notice the same name given in the (ngModel) binding
 
         if(this.authService.isAuthenticated()){
             this.route.navigate(['/events']);
@@ -22,5 +24,9 @@ export class LoginComponent {
         else{
             window.alert("Wrong User Credentials!");
         }
+    }
+
+    cancel(){
+        this.route.navigate(['/events']);
     }
 }

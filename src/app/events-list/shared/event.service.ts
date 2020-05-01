@@ -22,6 +22,12 @@ export class EventService{
         //assuming an AJAX call is happening
         return EVENTS.find( event => event.id === id );
     }
+
+    saveEvent(eventValues){
+      eventValues.id = 999; //randomly assigned.
+      eventValues.session = [];
+      EVENTS.push(eventValues);
+    }
 }
 
 const EVENTS:IEvent[] = [
