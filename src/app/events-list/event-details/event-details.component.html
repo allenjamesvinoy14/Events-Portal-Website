@@ -1,6 +1,6 @@
 <div class = "container">
     <img [src]="event?.imageUrl" [alt]="event?.name" class = "event-image">
-  
+
     <div class="row">
       <div class="col-md-11">
         <h2>{{event?.name}} </h2>
@@ -9,9 +9,9 @@
   
     <div class="row">
       <div class="col-md-6">
-        <div><strong>Date:</strong> {{event?.date}}</div>
+        <div><strong>Date:</strong> {{event?.date | date}}</div>
         <div><strong>Time:</strong> {{event?.time}}</div>
-        <div><strong>Price:</strong> ${{event?.price}}</div>
+        <div><strong>Price:</strong> {{event?.price | currency:'INR'}}</div>
       </div>
       <div class="col-md-6">
         <address>
@@ -24,6 +24,21 @@
 
     <hr>
 
-    <session-list [sessions]="event?.sessions"></session-list>
+    <div class="row">
+
+      <div class="col-md-3">
+        <h3 style="margin:0">Sessions</h3>
+      </div>
+
+      <div class="col-mid-7" style="margin-bottom: 10px; ">
+        <button class="btn btn-default" [class.active]="filterBy==='all'" (click)="filterBy='all'">All</button>
+        <button class="btn btn-default" [class.active]="filterBy==='beginner'" (click)="filterBy='beginner'">Beginner</button>
+        <button class="btn btn-default" [class.active]="filterBy==='intermediate'" (click)="filterBy='intermediate'">Intermediate</button>
+        <button class="btn btn-default" [class.active]="filterBy==='advanced'" (click)="filterBy='advanced'">Advanced</button>
+      </div>
+
+    </div>
+
+    <session-list [filterBy]="filterBy" [sessions]="event?.sessions"></session-list>
 
   </div>

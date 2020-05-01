@@ -4,15 +4,15 @@ import { IEvent } from './shared/event.model';
 @Component({
     selector: 'event-thumbnail',
     template: `<div [routerLink] = "['/events',event.id]" class = "well hoverwell thumbnail">
-                    <h2>{{event?.name}}</h2>
-                    <div>Date: {{event?.date}}</div>
+                    <h2>{{event?.name | uppercase }}</h2>
+                    <div>Date: {{event?.date | date}}</div>
                     <div>Time: {{event?.time}}</div>
                     <div [ngClass]="getStartTimeClass()" [ngSwitch] = "event?.time"> 
                         <span *ngSwitchCase = "'8:00 am'">Early Start!</span>
                         <span *ngSwitchCase = "'10:00 am'">Late Start!</span>
                         <span *ngSwitchDefault>Normal Start!</span>
                     </div>
-                    <div>Price: Rs. {{event?.price}}</div>
+                    <div>Price: {{event?.price | currency:'INR'}}</div>
                     <div *ngIf="event?.location"> 
                         <span>Location: {{event?.location?.address}}</span>
                         <span>&nbsp;</span>
