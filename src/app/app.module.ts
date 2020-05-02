@@ -20,6 +20,11 @@ import { CreateSessionComponent } from './events-list/event-details/create-sessi
 import { SessionListComponent } from './events-list/event-details/session-list.component';
 import { CollapsibleWellComponent } from './common/collapsible-well.component';
 import { DurationPipe } from './events-list/shared/duration.pipe';
+import { SimpleModalComponent } from './common/simpleModal.component';
+import { JQ_TOKEN } from './common/jQuery.service';
+import { ModalTriggerDirective } from './common/modal-trigger.directive';
+
+let jQuery = window['$'];
 
 @NgModule({
   declarations: [
@@ -33,7 +38,9 @@ import { DurationPipe } from './events-list/shared/duration.pipe';
     CreateSessionComponent,
     SessionListComponent,
     CollapsibleWellComponent,
-    DurationPipe
+    DurationPipe,
+    SimpleModalComponent,
+    ModalTriggerDirective
   ],
   imports: [
     BrowserModule,
@@ -49,6 +56,10 @@ import { DurationPipe } from './events-list/shared/duration.pipe';
               {
                 provide: 'canDeactivateCreateEvent',
                 useValue: checkUnsaved
+              },
+              {
+                provide: JQ_TOKEN,
+                useValue: jQuery
               }
               ],
   bootstrap: [EventsAppComponent]
